@@ -28,6 +28,8 @@ const CarCard = ({ car }: CarCardProps) => {
       ? 'bg-orange-500'
       : category === 'HB'
       ? 'bg-purple-500'
+      : category === 'Sedan'
+      ? 'bg-slate-500'
       : 'bg-lime-700';
 
   return (
