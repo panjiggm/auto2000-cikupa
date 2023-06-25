@@ -33,6 +33,11 @@ const blog = {
       type: 'url',
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'array',

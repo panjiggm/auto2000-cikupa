@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
 import { PortableTextBlock } from 'sanity';
 
 export interface Variant {
@@ -8,9 +8,26 @@ export interface Variant {
   type: string;
 }
 
+export interface CarsProps {
+  id: string;
+  createdAt: string;
+  name: string;
+  slug: string;
+  image: string;
+  url: string;
+  price: number;
+  category: string;
+  popular: boolean;
+  other: {
+    capacity: string;
+    tire_size?: string;
+    spare_key?: string;
+  };
+}
+
 export interface CarProps {
-  _id: string;
-  _createdAt: string;
+  id: string;
+  createdAt: string;
   name: string;
   slug: string;
   image: string;
@@ -19,6 +36,7 @@ export interface CarProps {
   price: number;
   category: string;
   year: number;
+  popular: boolean;
   color: Array<string>;
   dimension: {
     total_length: string;
@@ -35,7 +53,7 @@ export interface CarProps {
     torque: string;
     fuel_system: string;
   };
-  feature: {
+  features: {
     airbag: boolean;
     sunroof: boolean;
     spare_tire: boolean;
@@ -50,6 +68,18 @@ export interface CarProps {
     spare_key: string;
   };
   variant: Array<Variant>;
+}
+
+export interface BlogProps {
+  _id: string;
+  createdAt: string;
+  name: string;
+  slug: string;
+  image: string;
+  url: string;
+  description: string;
+  category: string;
+  content: PortableTextBlock[];
 }
 
 export interface FilterProps {
@@ -92,6 +122,7 @@ export interface OptionProps {
 export interface CustomFilterProps {
   title: string;
   options: OptionProps[];
+  // onCarType: Dispatch<SetStateAction<string>>;
 }
 
 export interface ShowMoreProps {

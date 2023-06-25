@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { GiCarSeat } from 'react-icons/gi';
 import { FaCar } from 'react-icons/fa';
@@ -8,16 +7,14 @@ import { FaCar } from 'react-icons/fa';
 import { formatRupiah } from '@utils';
 import { CarProps } from '@types';
 import CustomButton from './CustomButton';
-import CarDetails from './CarDetails';
+import Link from 'next/link';
 
 interface CarCardProps {
   car: CarProps;
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const { name, price, category, engine, other, variant } = car;
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { name, price, category, slug, other, variant } = car;
 
   const categoryBg =
     category === 'MPV'
@@ -29,19 +26,21 @@ const CarCard = ({ car }: CarCardProps) => {
       : category === 'HB'
       ? 'bg-purple-500'
       : category === 'Sedan'
-      ? 'bg-slate-500'
+      ? 'bg-teal-800'
+      : category === 'Sport'
+      ? 'bg-red-700'
       : 'bg-lime-700';
 
   return (
-    <div className="car-card group">
+    <div className="car-card group overflow-hidden">
       <div className="car-card__content">
         <h2 className="car-card__content-title">{name}</h2>
       </div>
 
       <div className="mt-5">
-        <p className="text-md text-gray-500">Harga Mulai</p>
-        <p className="flex text-2xl font-extrabold">
-          {formatRupiah(price)}
+        <p className="text-sm text-gray-500">Harga Mulai</p>
+        <p className="flex text-xl font-extrabold">
+          {price === 0 ? 'Pre-Order' : formatRupiah(price)}
         </p>
       </div>
 
@@ -67,7 +66,7 @@ const CarCard = ({ car }: CarCardProps) => {
             <div className="car-card__icon bg-green-600">
               <GiCarSeat size={16} color="#FFF" />
               <p className="car-card__icon-text text-white">
-                {other.capacity} Seater
+                {other.capacity}
               </p>
             </div>
             <div className={`car-card__icon ${categoryBg}`}>
@@ -80,21 +79,20 @@ const CarCard = ({ car }: CarCardProps) => {
         </div>
 
         <div className="car-card__btn-container">
-          <CustomButton
-            title="Selengkapnya"
-            containerStyles="w-full py-[16px] rounded-full bg-red-600"
-            textStyles="text-white text-[14px] leading-[17px] font-bold"
-            rightIcon="/right-arrow.svg"
-            handleClick={() => setIsOpen(true)}
-          />
+          <Link
+            href={`/mobil/${slug}`}
+            key={car.id}
+            className="w-full"
+          >
+            <CustomButton
+              title="Selengkapnya"
+              containerStyles="w-full py-[16px] rounded-full bg-red-600"
+              textStyles="text-white text-[14px] leading-[17px] font-bold"
+              rightIcon="/right-arrow.svg"
+            />
+          </Link>
         </div>
       </div>
-
-      {/* <CarDetails
-        isOpen={isOpen}
-        closeModal={() => setIsOpen(false)}
-        car={car}
-      /> */}
     </div>
   );
 };

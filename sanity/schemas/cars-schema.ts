@@ -33,6 +33,11 @@ const cars = {
       type: 'url',
     },
     {
+      name: 'popular',
+      title: 'Popular',
+      type: 'boolean',
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'array',

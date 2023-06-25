@@ -64,6 +64,9 @@
 /* END: Hero styles */
 
 /* START: Home styles */
+.title__center {
+  @apply font-bold text-lg text-gray-800 text-center;
+}
 
 .home__text-container {
   @apply flex flex-col items-start justify-start gap-y-2.5 text-black-100;

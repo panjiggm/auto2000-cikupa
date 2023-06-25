@@ -42,6 +42,15 @@ export const manufacturers = [
   'Volvo',
 ];
 
+export const carTypes = [
+  { title: 'MPV', value: 'MPV' },
+  { title: 'SUV', value: 'SUV' },
+  { title: 'LCGC', value: 'LCGC' },
+  { title: 'Sedan', value: 'Sedan' },
+  { title: 'Sport', value: 'Sport' },
+  { title: 'Commercial', value: 'Commercial' },
+];
+
 export const yearsOfProduction = [
   { title: 'Tahun', value: '' },
   { title: '2023', value: '2023' },
@@ -73,29 +82,19 @@ export const fuels = [
 export const footerLinks = [
   {
     title: 'About',
-    links: [
-      { title: 'How it works', url: '/' },
-      { title: 'Featured', url: '/' },
-      { title: 'Partnership', url: '/' },
-      { title: 'Bussiness Relation', url: '/' },
-    ],
+    links: [{ title: 'Home', url: '/' }],
   },
   {
     title: 'Company',
     links: [
-      { title: 'Events', url: '/' },
-      { title: 'Blog', url: '/' },
-      { title: 'Podcast', url: '/' },
-      { title: 'Invite a friend', url: '/' },
+      { title: 'Mobil', url: '/mobil' },
+      { title: 'Blog', url: '/blog' },
     ],
   },
   {
     title: 'Socials',
     links: [
-      { title: 'Discord', url: '/' },
-      { title: 'Instagram', url: '/' },
-      { title: 'Twitter', url: '/' },
-      { title: 'Facebook', url: '/' },
+      { title: 'Facebook', url: 'https://facebook.com/Charlesncex' },
     ],
   },
 ];
