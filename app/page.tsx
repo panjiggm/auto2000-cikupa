@@ -1,10 +1,10 @@
 import { HomeProps } from '@types';
-import { CarCard, ContactInfo, Hero } from '@components';
+import { CarCard, ClientSideRoute, ContactInfo, Hero } from '@components';
 import { getBlogs, getCars } from '@sanity/sanity-utils';
 import Image from 'next/image';
 import BlogList from '@components/BlogList';
 
-export default async function Home({}: HomeProps) {
+export default async function Home({ }: HomeProps) {
   const allCars = await getCars();
   const allBlogs = await getBlogs();
 
@@ -19,7 +19,7 @@ export default async function Home({}: HomeProps) {
         className="mt-12 padding-x padding-y max-width"
         id="discover"
       >
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+        <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
           <div className="home__text-container">
             <h1 className="text-4xl font-extrabold">
               Mobil Terpopuler
@@ -27,8 +27,8 @@ export default async function Home({}: HomeProps) {
             <p>Jelajahi mobil yang mungkin Anda sukai</p>
           </div>
 
-          <div className="flex items-center hover:opacity-60 cursor-pointer gap-1">
-            <h2 className="text-blue-600 font-semibold text-xl">
+          <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
+            <h2 className="text-xl font-semibold text-blue-600">
               Lihat semua Mobil
             </h2>
             <div className="relative w-5 h-5 bg-blue-500 rounded-lg">
@@ -47,13 +47,18 @@ export default async function Home({}: HomeProps) {
           <section>
             <div className="home__cars-wrapper">
               {allCars?.map((car, i) => (
-                <CarCard car={car} key={i} />
+                <ClientSideRoute
+                  route={`/mobil/${car.slug}`}
+                  key={car.id}
+                >
+                  <CarCard car={car} />
+                </ClientSideRoute>
               ))}
             </div>
           </section>
         ) : (
           <div className="home__error-container">
-            <h2 className="text-black text-xl font-bold">
+            <h2 className="text-xl font-bold text-black">
               Oops, tidak ada hasil
             </h2>
           </div>
@@ -70,14 +75,14 @@ export default async function Home({}: HomeProps) {
           <hr />
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+        <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
           <div className="home__text-container">
             <h1 className="text-4xl font-extrabold">Berita & Tips</h1>
             <p>Update terbaru seputar otomotif dari Toyota</p>
           </div>
 
-          <div className="flex items-center hover:opacity-60 cursor-pointer gap-1">
-            <h2 className="text-blue-600 font-semibold text-xl">
+          <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
+            <h2 className="text-xl font-semibold text-blue-600">
               Lihat semua Artikel
             </h2>
             <div className="relative w-5 h-5 bg-blue-500 rounded-lg">

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getCarsByCategory } from '@sanity/sanity-utils';
-import { CarCard, ListCategory, SelectCategory } from '@components';
+import { CarCard, ClientSideRoute, ListCategory, SelectCategory } from '@components';
 import { carTypes } from '@constants';
 import { CarProps } from '@types';
 
@@ -14,31 +14,31 @@ export default function Mobils() {
     category === 'MPV'
       ? 'text-cyan-700'
       : category === 'LCGC'
-      ? 'text-rose-500'
-      : category === 'SUV'
-      ? 'text-orange-500'
-      : category === 'HB'
-      ? 'text-purple-500'
-      : category === 'Sedan'
-      ? 'text-teal-800'
-      : category === 'Sport'
-      ? 'text-red-700'
-      : 'text-lime-700';
+        ? 'text-rose-500'
+        : category === 'SUV'
+          ? 'text-orange-500'
+          : category === 'HB'
+            ? 'text-purple-500'
+            : category === 'Sedan'
+              ? 'text-teal-800'
+              : category === 'Sport'
+                ? 'text-red-700'
+                : 'text-lime-700';
 
   const categoryBg =
     category === 'MPV'
       ? 'bg-cyan-100'
       : category === 'LCGC'
-      ? 'bg-rose-100'
-      : category === 'SUV'
-      ? 'bg-orange-100'
-      : category === 'HB'
-      ? 'bg-purple-100'
-      : category === 'Sedan'
-      ? 'bg-teal-100'
-      : category === 'Sport'
-      ? 'bg-red-100'
-      : 'bg-lime-100';
+        ? 'bg-rose-100'
+        : category === 'SUV'
+          ? 'bg-orange-100'
+          : category === 'HB'
+            ? 'bg-purple-100'
+            : category === 'Sedan'
+              ? 'bg-teal-100'
+              : category === 'Sport'
+                ? 'bg-red-100'
+                : 'bg-lime-100';
 
   useEffect(() => {
     const fetchCarsByCategory = async () => {
@@ -75,7 +75,7 @@ export default function Mobils() {
         <section className="grid grid-cols-1 md:grid-cols-4 md:gap-6">
           <div className="mt-10 md:block">
             <div className="mb-4">
-              <h1 className="text-xl mb-1">Filter : </h1>
+              <h1 className="mb-1 text-xl">Filter : </h1>
               <p
                 className={`${categoryText} ${categoryBg} rounded-lg text-xs py-2 px-4 w-full`}
               >
@@ -100,8 +100,13 @@ export default function Mobils() {
 
           <div className="col-span-3">
             <div className="home__cars-wrapper">
-              {cars?.map((car, i) => (
-                <CarCard car={car} key={i} />
+              {cars?.map((car) => (
+                <ClientSideRoute
+                  route={`/mobil/${car.slug}`}
+                  key={car.id}
+                >
+                  <CarCard car={car} />
+                </ClientSideRoute>
               ))}
             </div>
           </div>
