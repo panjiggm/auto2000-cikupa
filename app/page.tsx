@@ -1,5 +1,5 @@
 import { HomeProps } from '@types';
-import { CarCard, ClientSideRoute, ContactInfo, Hero } from '@components';
+import { CarList, ContactInfo, Hero } from '@components';
 import { getBlogs, getCars } from '@sanity/sanity-utils';
 import Image from 'next/image';
 import BlogList from '@components/BlogList';
@@ -45,16 +45,7 @@ export default async function Home({ }: HomeProps) {
         {/* ============= CARS =============  */}
         {!isDataEmpty ? (
           <section>
-            <div className="home__cars-wrapper">
-              {allCars?.map((car, i) => (
-                <ClientSideRoute
-                  route={`/mobil/${car.slug}`}
-                  key={car.id}
-                >
-                  <CarCard car={car} />
-                </ClientSideRoute>
-              ))}
-            </div>
+            <CarList cars={allCars} />
           </section>
         ) : (
           <div className="home__error-container">

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getCarsByCategory } from '@sanity/sanity-utils';
-import { CarCard, ClientSideRoute, ListCategory, SelectCategory } from '@components';
+import { CarList, ListCategory, SelectCategory } from '@components';
 import { carTypes } from '@constants';
 import { CarProps } from '@types';
 
@@ -99,16 +99,7 @@ export default function Mobils() {
           </div>
 
           <div className="col-span-3">
-            <div className="home__cars-wrapper">
-              {cars?.map((car) => (
-                <ClientSideRoute
-                  route={`/mobil/${car.slug}`}
-                  key={car.id}
-                >
-                  <CarCard car={car} />
-                </ClientSideRoute>
-              ))}
-            </div>
+            <CarList cars={cars} />
           </div>
         </section>
       </div>

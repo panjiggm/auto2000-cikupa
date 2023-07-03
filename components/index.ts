@@ -11,6 +11,7 @@ import ClientSideRoute from './ClientSideRoute';
 import ListCategory from './ListCategory';
 import SelectCategory from './SelectCategory';
 import CarSpesification from './CarSpesification';
+import CarList from './CarList';
 
 import { RichTextComponents } from './RichTextComponents';
 
@@ -28,5 +29,6 @@ export {
   ListCategory,
   SelectCategory,
   CarSpesification,
+  CarList,
   RichTextComponents,
 };
