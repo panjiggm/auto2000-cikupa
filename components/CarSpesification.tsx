@@ -36,9 +36,7 @@ const CarSpesification = ({ car }: CarSpesificationProps) => {
     }
 
     getCarVariants()
-  }, [])
-
-  console.log("carVariants", carVariants);
+  }, []);
 
   return (
     <div className="my-6 mb-6">
