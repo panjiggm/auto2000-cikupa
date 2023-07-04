@@ -2,10 +2,17 @@ import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
 import { PortableTextBlock } from 'sanity';
 
 export interface Variant {
+  _id: string;
   name: string;
   price: number;
   transmition: string;
   type: string;
+}
+
+export interface CarVariant {
+  _key: string;
+  _type: string;
+  _ref: string;
 }
 
 export interface CarsProps {
@@ -67,7 +74,7 @@ export interface CarProps {
     tire_size: string;
     spare_key: string;
   };
-  variant: Array<Variant>;
+  variant: Array<CarVariant>;
 }
 
 export interface BlogProps {

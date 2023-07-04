@@ -86,9 +86,6 @@ export default async function Mobil({ params }: MobilProps) {
                 sizes="100vw"
                 className="w-full h-auto rounded"
               />
-              <h1 className="my-6 mb-6 text-lg font-extrabold">
-                Spesifikasi
-              </h1>
 
               <CarSpesification car={car} />
             </div>

@@ -1,4 +1,4 @@
-import { BlogProps, CarProps } from '@types';
+import { BlogProps, CarProps, Variant } from '@types';
 import { createClient, groq } from 'next-sanity';
 import clientConfig from '@sanity/config/client-config';
 
@@ -138,4 +138,14 @@ export async function getCar(slug: string): Promise<CarProps> {
     }`,
     { slug }
   );
+}
+
+export async function getVariants(): Promise<Variant[]> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "variant"]{
+      _id,
+      name,
+      price,
+    }`
+  )
 }

@@ -1,23 +1,77 @@
-import { CarProps } from '@types';
+'use client'
+
+import { useEffect, useState } from 'react';
+import { CarProps, Variant } from '@types';
 import { PiEngineBold } from 'react-icons/pi';
 import { TbDimensions } from 'react-icons/tb';
 import { TbWashMachine } from 'react-icons/tb';
 import { PiDotsNineBold } from 'react-icons/pi';
+import { getVariants } from '@sanity/sanity-utils';
+import { formatRupiah } from '@utils';
 
 interface CarSpesificationProps {
   car: CarProps;
 }
 
 const CarSpesification = ({ car }: CarSpesificationProps) => {
+  const [carVariants, setCarVariants] = useState<Variant[]>([]);
+
+  useEffect(() => {
+    const getCarVariants = async () => {
+      try {
+        const variants = await getVariants()
+
+        const variantsFiltered = variants.filter((el) => {
+          return car.variant.some((em) => {
+            return el._id === em._ref;
+          });
+        });
+
+        setCarVariants(variantsFiltered);
+
+      } catch (error) {
+        console.log("Error GET Car Variants", error);
+
+      }
+    }
+
+    getCarVariants()
+  }, [])
+
+  console.log("carVariants", carVariants);
+
   return (
-    <div className="">
+    <div className="my-6 mb-6">
+      <h1 className="text-lg font-extrabold">
+        Varian
+      </h1>
+
+      <div>
+        <p className="text-[14px] leading-[17px] my-3">
+          {car.variant ? car.variant?.length : '0'} Tipe
+        </p>
+
+        <div className=''>
+          {carVariants?.map((variant) => (
+            <div key={variant._id} className='flex items-center justify-between py-1 border-b border-gray-300'>
+              <h3 className='text-xs md:text-sm'>{variant.name}</h3>
+              <h3 className='text-xs font-bold md:text-sm'>{formatRupiah(variant.price)}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <h1 className="mt-8 mb-4 text-lg font-extrabold">
+        Spesifikasi
+      </h1>
+
       <div className="mb-6">
-        <div className="flex items-center gap-2 underline mb-3">
+        <div className="flex items-center gap-2 mb-3 underline">
           <TbDimensions size={20} className="text-red-600" />
-          <h1 className="text-red-600 font-bold">Dimensi</h1>
+          <h1 className="font-bold text-red-600">Dimensi</h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <div className="flex flex-col mb-2">
               <p>Panjang Total :</p>
@@ -56,16 +110,16 @@ const CarSpesification = ({ car }: CarSpesificationProps) => {
       <hr />
 
       <div className="my-6">
-        <div className="flex items-center gap-2 underline mb-3">
+        <div className="flex items-center gap-2 mb-3 underline">
           <PiEngineBold size={20} className="text-red-600" />
-          <h1 className="text-red-600 font-bold">Mesin</h1>
+          <h1 className="font-bold text-red-600">Mesin</h1>
         </div>
 
         <div className="flex flex-col mb-2">
           <p>Detil Mesin :</p>
           <p className="font-bold">{car.engine?.detail}</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <div className="flex flex-col mb-2">
               <p>Bahan Bakar :</p>
@@ -96,12 +150,12 @@ const CarSpesification = ({ car }: CarSpesificationProps) => {
       <hr />
 
       <div className="my-6">
-        <div className="flex items-center gap-2 underline mb-3">
+        <div className="flex items-center gap-2 mb-3 underline">
           <TbWashMachine size={20} className="text-red-600" />
-          <h1 className="text-red-600 font-bold">Fitur</h1>
+          <h1 className="font-bold text-red-600">Fitur</h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <div className="flex flex-col mb-2">
               <p>Airbag :</p>
@@ -154,12 +208,12 @@ const CarSpesification = ({ car }: CarSpesificationProps) => {
       <hr />
 
       <div className="my-6">
-        <div className="flex items-center gap-2 underline mb-3">
+        <div className="flex items-center gap-2 mb-3 underline">
           <PiDotsNineBold size={20} className="text-red-600" />
-          <h1 className="text-red-600 font-bold">Lainya</h1>
+          <h1 className="font-bold text-red-600">Lainya</h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <div className="flex flex-col mb-2">
               <p>Kapasitas :</p>

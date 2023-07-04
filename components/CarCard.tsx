@@ -7,6 +7,7 @@ import { FaCar } from 'react-icons/fa';
 import { formatRupiah } from '@utils';
 import { CarProps } from '@types';
 import CustomButton from './CustomButton';
+import ClientSideRoute from './ClientSideRoute';
 
 interface CarCardProps {
   car: CarProps;
@@ -79,12 +80,14 @@ const CarCard = ({ car }: CarCardProps) => {
 
         <div className="car-card__btn-container">
           <div className="w-full">
-            <CustomButton
-              title="Selengkapnya"
-              containerStyles="w-full py-[16px] rounded-full bg-red-600"
-              textStyles="text-white text-[14px] leading-[17px] font-bold"
-              rightIcon="/right-arrow.svg"
-            />
+            <ClientSideRoute route={`/mobil/${car.slug}`}>
+              <CustomButton
+                title="Selengkapnya"
+                containerStyles="w-full py-[16px] rounded-full bg-red-600"
+                textStyles="text-white text-[14px] leading-[17px] font-bold"
+                rightIcon="/right-arrow.svg"
+              />
+            </ClientSideRoute>
           </div>
         </div>
       </div>

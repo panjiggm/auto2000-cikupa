@@ -1,5 +1,5 @@
 import { HomeProps } from '@types';
-import { CarList, ContactInfo, Hero } from '@components';
+import { CarList, ClientSideRoute, ContactInfo, Hero } from '@components';
 import { getBlogs, getCars } from '@sanity/sanity-utils';
 import Image from 'next/image';
 import BlogList from '@components/BlogList';
@@ -27,19 +27,21 @@ export default async function Home({ }: HomeProps) {
             <p>Jelajahi mobil yang mungkin Anda sukai</p>
           </div>
 
-          <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
-            <h2 className="text-xl font-semibold text-blue-600">
-              Lihat semua Mobil
-            </h2>
-            <div className="relative w-5 h-5 bg-blue-500 rounded-lg">
-              <Image
-                src="/right-arrow.svg"
-                alt="arrow_left"
-                fill
-                className="object-contain"
-              />
+          <ClientSideRoute route='/mobil'>
+            <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
+              <h2 className="text-xl font-semibold text-blue-600">
+                Lihat semua Mobil
+              </h2>
+              <div className="relative w-5 h-5 bg-blue-500 rounded-lg">
+                <Image
+                  src="/right-arrow.svg"
+                  alt="arrow_left"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
-          </div>
+          </ClientSideRoute>
         </div>
 
         {/* ============= CARS =============  */}
@@ -72,19 +74,21 @@ export default async function Home({ }: HomeProps) {
             <p>Update terbaru seputar otomotif dari Toyota</p>
           </div>
 
-          <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
-            <h2 className="text-xl font-semibold text-blue-600">
-              Lihat semua Artikel
-            </h2>
-            <div className="relative w-5 h-5 bg-blue-500 rounded-lg">
-              <Image
-                src="/right-arrow.svg"
-                alt="arrow_left"
-                fill
-                className="object-contain"
-              />
+          <ClientSideRoute route='/blog'>
+            <div className="flex items-center gap-1 cursor-pointer hover:opacity-60">
+              <h2 className="text-xl font-semibold text-blue-600">
+                Lihat semua Artikel
+              </h2>
+              <div className="relative w-5 h-5 bg-blue-500 rounded-lg">
+                <Image
+                  src="/right-arrow.svg"
+                  alt="arrow_left"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
-          </div>
+          </ClientSideRoute>
         </div>
 
         {/* ============= BLOGS =============  */}
