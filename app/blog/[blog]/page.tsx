@@ -7,10 +7,26 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { ClientSideRoute, RichTextComponents } from '@components';
 import Link from 'next/link';
 import BlogCardSide from '@components/BlogCardSide';
+import { Metadata } from 'next';
 
 interface BlogDetailProps {
   params: { blog: string };
 }
+
+// set dynamic metadata
+export async function generateMetadata({ params }: BlogDetailProps): Promise<Metadata> {
+  // read route params
+  const slug = params.blog;
+
+  // fetch data
+  const blog = await getBlog(slug);
+
+  return {
+    title: blog.name,
+    description: blog.description,
+  };
+}
+
 
 export default async function BlogDetail({
   params,
@@ -25,7 +41,7 @@ export default async function BlogDetail({
       <div className="mt-20 padding-x padding-y max-width">
         <Link
           href="/"
-          className="relative inline-block text-lg group mb-10 mt-10"
+          className="relative inline-block mt-10 mb-10 text-lg group"
         >
           <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white ">
             <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50 dark:bg-white"></span>
@@ -44,7 +60,7 @@ export default async function BlogDetail({
         <section className="grid grid-cols-1 md:grid-cols-4 lg:gap-10">
           <article className="col-span-3">
             <div className="mb-10">
-              <h1 className="font-extrabold text-6xl mb-2 text-gray-900">
+              <h1 className="mb-2 text-6xl font-extrabold text-gray-900">
                 {blog.name}
               </h1>
               <p className="mt-4 mb-8 text-gray-500">
@@ -58,7 +74,7 @@ export default async function BlogDetail({
                 sizes="100vw"
                 className="w-full h-auto rounded"
               />
-              <p className="mt-4 text-gray-600 text-sm font-light">
+              <p className="mt-4 text-sm font-light text-gray-600">
                 Deskripsi: {blog.description}
               </p>
             </div>
@@ -69,10 +85,10 @@ export default async function BlogDetail({
           </article>
 
           <div className="w-full">
-            <h1 className="text-2xl underline font-extrabold mb-6">
+            <h1 className="mb-6 text-2xl font-extrabold underline">
               Artike Terkait
             </h1>
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1">
               {blogs?.map((blog) => (
                 <ClientSideRoute
                   route={`/blog/${blog.slug}`}

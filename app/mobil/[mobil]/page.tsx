@@ -1,5 +1,3 @@
-'use client';
-
 import { CarSpesification, RichTextComponents } from '@components';
 import { PortableText } from '@portabletext/react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -8,9 +6,24 @@ import { getCar } from '@sanity/sanity-utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatRupiah } from '@utils';
+import { Metadata } from 'next';
 
 interface MobilProps {
   params: { mobil: string };
+}
+
+// set dynamic metadata
+export async function generateMetadata({ params }: MobilProps): Promise<Metadata> {
+  // read route params
+  const slug = params.mobil;
+
+  // fetch data
+  const car = await getCar(slug);
+
+  return {
+    title: `Toyota ${car.name}`,
+    description: `Toyota ${car.name} terbaru`,
+  };
 }
 
 export default async function Mobil({ params }: MobilProps) {

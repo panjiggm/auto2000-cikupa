@@ -46,9 +46,7 @@ export default async function Home({ }: HomeProps) {
 
         {/* ============= CARS =============  */}
         {!isDataEmpty ? (
-          <section>
-            <CarList cars={allCars} />
-          </section>
+          <CarList cars={allCars} />
         ) : (
           <div className="home__error-container">
             <h2 className="text-xl font-bold text-black">
